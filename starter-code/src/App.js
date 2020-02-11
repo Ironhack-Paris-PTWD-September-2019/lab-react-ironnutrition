@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import FoodBox from './FoodBox.js';
 import foods from './foods.json';
 import AddFood from './AddFood.js';
@@ -9,7 +8,8 @@ import 'bulma/css/bulma.css';
 
 class App extends Component {
   state={
-    foods:foods
+    foods:foods,
+    foodMenu:[]
   }
   addFoodHandler=(theFood)=>{
     const copyFoods=[...this.state.foods];
@@ -25,16 +25,24 @@ class App extends Component {
     const copyFoods=[...this.state.foods];
 
     //const copyFoods2=copyFoods.filter(food => food.name===theFood.name)
-    const copyFoods2=copyFoods.filter(food => food.name.indexOf(theFood.name)>=0)
-    console.log('copyFoods2',copyFoods2)
+    const copyFoods2=copyFoods.filter(food => food.name.toLowerCase().indexOf(theFood.name.toLowerCase())>=0)
     this.setState({
       foods:copyFoods2
     })
+    
+  }
 
+  updateFoodHandler=(foodName,foodQties,foodCalories)=>{
+      var copyFoodMenu=[...this.state.foodMenu]
+      copyFoodMenu.push({name:foodName,qties:foodQties,calories:foodCalories})
+      console.log('copyFoodMenu',copyFoodMenu)
+      this.setState({
+        foodMenu:copyFoodMenu
+      })
   }
 
   render() {
-  
+    var totalCalories=0;
     return (
       <div className="App">
         {/*<header className="App-header">
@@ -45,21 +53,28 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>*/}
         {/*<FoodBox food="Pizza"/>*/}
-        <SearchBar searchTheFood={this.searchFoodHandler}/>  
-        <div className="columns">
-          <div className="column">
+        <div className="add-margin"><SearchBar searchTheFood={this.searchFoodHandler} /></div>
+        <div className="add-margin"><AddFood addTheFood={this.addFoodHandler}/></div>
+        <div className="columns is-mobile ">
+          <div className="column add-margin">
             {this.state.foods.map( (food,index) => {
               return(
-                <FoodBox food={food.name} calories={food.calories} image={food.image} key={food.id}/>
-          
+                <FoodBox food={food.name} calories={food.calories} image={food.image} key={food.id} updateFood={this.updateFoodHandler}/>
               )
             })}
           </div> 
-          <div clasName="column">
+          <div className="column add-margin">
             Today Food
+            {this.state.foodMenu.map((food,index) => {
+              totalCalories+=food.qties*food.calories;
+              return(
+              <div key={index}> {food.qties} {food.name} = {food.qties*food.calories} cal</div>
+              )
+            })}
+            <div>Total:{totalCalories} cal </div>
           </div>
         </div>
-        <AddFood addTheFood={this.addFoodHandler}/>
+        
       </div>
     );
   }

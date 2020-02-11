@@ -1,12 +1,12 @@
 import React from 'react';
 class FoodBox extends React.Component {
-    state = {
-        todayFood:'none'
+    state={
+        foodQties:1
     }
 
-    appearTodayFood=()=>{
+    updateFoodQties=(event) => {
         this.setState({
-            todayFood:'block'
+            foodQties:event.target.value
         })
     }
     render(){
@@ -33,12 +33,12 @@ class FoodBox extends React.Component {
                         <input
                             className="input"
                             type="number" 
-                            value="1"
-                            onChange={() => {}}
+                            value={this.state.foodQties}
+                            onChange={event => this.updateFoodQties(event)}
                         />
                         </div>
                         <div className="control">
-                        <button className="button is-info" onClick={this.appearTodayFood}>
+                        <button className="button is-info" onClick={(event)=>this.props.updateFood(this.props.food,this.state.foodQties,this.props.calories)}>
                             +
                         </button>
                         </div>

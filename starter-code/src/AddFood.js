@@ -16,7 +16,7 @@ class AddFood extends React.Component {
     }
 
     handleChange=(event)=>{
-        let {name,value,type} = event.target;
+        let {name,value} = event.target;
         this.setState({[name]:value})
     }
 
