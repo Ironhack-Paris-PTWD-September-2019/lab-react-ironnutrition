@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
-// import foods from './foods.json';
+
 
 class FoodBox extends Component {
-    state ={
-        id: "1",
-        name: "Pizza",
-        calories: 400,
-        image: "https://i.imgur.com/eTmWoAN.png"
+    constructor(props) {
+        super(props);
+        this.state ={
+            id: props.food.id,
+            name: props.food.name,
+            calories: props.food.calories,
+            image: props.food.image
+        }
     }
     render() {
         
@@ -15,7 +18,7 @@ class FoodBox extends Component {
                 <article className="media">
                     <div className="media-left">
                     <figure className="image is-64x64">
-                        <img src={this.state.image} />
+                        <img src={this.state.image} alt={this.state.name}/>
                     </figure>
                     </div>
                     <div className="media-content">
@@ -32,7 +35,7 @@ class FoodBox extends Component {
                         <input
                             className="input"
                             type="number" 
-                            value={this.state.id}
+                            value="1"
                         />
                         </div>
                         <div className="control">
