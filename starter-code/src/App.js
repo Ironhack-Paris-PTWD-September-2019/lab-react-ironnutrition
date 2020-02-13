@@ -25,7 +25,7 @@ class App extends Component {
     const copyFoods=[...this.state.foods];
 
     //const copyFoods2=copyFoods.filter(food => food.name===theFood.name)
-    const copyFoods2=copyFoods.filter(food => food.name.toLowerCase().indexOf(theFood.name.toLowerCase())>=0)
+    const copyFoods2=copyFoods.filter(food => food.name.toLowerCase().indexOf(theFood.toLowerCase())!==-1)
     this.setState({
       foods:copyFoods2
     })

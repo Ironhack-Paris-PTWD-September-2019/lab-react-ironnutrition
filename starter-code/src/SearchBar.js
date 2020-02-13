@@ -23,7 +23,7 @@ class SearchBar extends React.Component {
     handleChange=(event)=>{
         console.log('event',event)
         //let {name,value,type} = event.target;
-        this.props.searchTheFood(this.state);
+        this.props.searchTheFood(event.target.value);
         this.setState({name:event.target.value})
     }
     
