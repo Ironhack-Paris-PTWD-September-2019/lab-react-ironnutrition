@@ -75,3 +75,17 @@ form.button {
 .box.right h1 {
   font-size: 2em;
 }
+
+.foodItem-list {
+  display: flex;
+  align-items: center;
+}
+
+.todayFood-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.todayFood-box p {
+  text-align: left;
+}

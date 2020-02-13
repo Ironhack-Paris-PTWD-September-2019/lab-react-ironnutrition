@@ -55,6 +55,15 @@ class App extends Component {
     });
   };
 
+  deleteFoodToday = id => {
+    let ind = this.state.todayFood.findIndex(x => x.food.if === id);
+    let newListOfFood = [...this.state.todayFood];
+    newListOfFood.splice(ind, 1);
+
+    this.setState({
+      todayFood: newListOfFood
+    });
+  };
   render() {
     return (
       <div className="App">
@@ -97,23 +106,34 @@ class App extends Component {
           </div>
           <div className="box right">
             <h1>Today's Food</h1>
-            {this.state.todayFood.map(item => {
-              return (
-                <p key={item.food.id}>
-                  {item.quantity} {item.food.name} ={" "}
-                  {parseInt(item.food.calories) * item.quantity}
-                </p>
-              );
-            })}
-            <p>
-              Total :{" "}
-              {this.state.todayFood.reduce(
-                (acc, currValue) =>
-                  acc + parseInt(currValue.food.calories) * currValue.quantity,
-                0
-              )}{" "}
-              cal
-            </p>
+            <div className="todayFood-box">
+              {this.state.todayFood.map(item => {
+                return (
+                  <div key={item.food.id} className="foodItem-list">
+                    <p key={item.food.id}>
+                      {item.quantity} {item.food.name} ={" "}
+                      {parseInt(item.food.calories) * item.quantity}
+                    </p>
+                    <img
+                      key={item.food.id}
+                      style={{ marginLeft: "10px", cursor: "pointer" }}
+                      onClick={() => this.deleteFoodToday(item.food.id)}
+                      src="./trash.png"
+                    />
+                  </div>
+                );
+              })}
+              <p style={{ fontWeight: "bolder" }}>
+                Total :{" "}
+                {this.state.todayFood.reduce(
+                  (acc, currValue) =>
+                    acc +
+                    parseInt(currValue.food.calories) * currValue.quantity,
+                  0
+                )}{" "}
+                cal
+              </p>
+            </div>
           </div>
         </div>
       </div>
