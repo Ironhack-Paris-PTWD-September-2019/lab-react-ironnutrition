@@ -3,22 +3,28 @@ import React from 'react'
 class SearchFood extends React.Component {
 
     state = {
-        input : ''
+        search : ''
     }
 
-    handleWordInput = (e) =>{
+    searchSpace=(event)=>{
+        let keyword = event.target.value;
+        this.props.searchTheDish(keyword); 
         this.setState({
-            input : e.target.value
+            search:keyword
         })
       }
 
-render() {
+    // handleSearch = (event) => {
+    //     this.props.searchTheDish(this.state.search)
+    // }
 
-    return (
-        <input type='search' value ={this.state.input} onChange={this.handleWordInput}/>
-    )
-}
-
+    render(){
+        return(
+            <div>
+              <input type="search" value={this.state.search} onChange={this.searchSpace}/>
+            </div>
+        )
+    }
 }
 
 export default SearchFood

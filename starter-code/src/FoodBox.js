@@ -23,12 +23,12 @@ const Foodbox =(props)=>{
           <input
             className="input"
             type="number" 
-            value="1"
+            value={props.quantity}
           />
         </div>
         <div className="control">
           <button className="button is-info">
-            +
+            -
           </button>
         </div>
       </div>
