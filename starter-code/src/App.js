@@ -4,6 +4,7 @@ import 'bulma/css/bulma.css';
 import foods from './foods.json'
 import FoodBox from './components/FoodBox'
 import AddNewFood from './components/AddNewFood'
+import SearchFood from './components/SearchFood'
 
 class App extends Component {
 
@@ -13,20 +14,29 @@ class App extends Component {
 
   addFoodHandler = (theFood) => {
     const foodsCopy = [...this.state.foodList];
-
     foodsCopy.push(theFood); 
     this.setState({
       foodList: foodsCopy
     })
   }
 
+  searchEngine = (theletters) => {
+    const foodsCopy = [...this.state.foodList];
+    let filteredList = foodsCopy.filter(theFood => {
+      return theFood.name.toLowerCase().indexOf(theletters.toLowerCase()) !== -1
+    })
+    
+    this.setState({
+      foodList: filteredList
+    })
+  }
   
   render() {
-    console.log('yoooooo' , this.state.foodList)
+    
     return (
-  
       <div className="App">
-        <AddNewFood addTheFood={this.addFoodHandler}/>
+        <AddNewFood addTheFood={this.addFoodHandler} />
+        <SearchFood searchTheDish={this.searchEngine} />
         {this.state.foodList.map((dish)=>{
           return(
             <ul>
