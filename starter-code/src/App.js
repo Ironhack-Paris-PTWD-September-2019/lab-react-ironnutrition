@@ -112,7 +112,7 @@ class App extends Component {
                   <div key={item.food.id} className="foodItem-list">
                     <p key={item.food.id}>
                       {item.quantity} {item.food.name} ={" "}
-                      {parseInt(item.food.calories) * item.quantity}
+                      {parseInt(item.food.calories) * item.quantity} cal
                     </p>
                     <img
                       key={item.food.id}
