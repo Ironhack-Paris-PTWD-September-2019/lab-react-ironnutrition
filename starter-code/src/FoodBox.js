@@ -8,7 +8,7 @@ class FoodBox extends Component {
             <article className="media">
               <div className="media-left">
                 <figure className="image is-64x64">
-                  <img src={this.props.img} />
+                  <img src={this.props.image} alt="imageFood" />
                 </figure>
               </div>
               <div className="media-content">
