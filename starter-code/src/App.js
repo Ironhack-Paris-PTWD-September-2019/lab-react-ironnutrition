@@ -10,7 +10,8 @@ class App extends Component {
 
   state = {
     foodList : foods,
-    foodsToDisplay : []
+    foodsToDisplay : [],
+    total : []
   }
 
   addFoodHandler = (theFood) => {
@@ -22,8 +23,8 @@ class App extends Component {
   }
 
   searchEngine = (theletters) => {
-    const foodsCopy = [...this.state.foodList];
-    let filteredList = foodsCopy.filter(theFood => {
+    //const foodsCopy = [...this.state.foodList];
+    let filteredList = foods.filter(theFood => {
       return theFood.name.toLowerCase().indexOf(theletters.toLowerCase()) !== -1;
     })
     
@@ -33,13 +34,15 @@ class App extends Component {
   }
 
   displayFoodHandler = (theFood) => {
-    return(
-      theFood.name
-    )
+    const displayCopy = [...this.state.foodsToDisplay]
+    displayCopy.push(theFood)
+    this.setState({
+      foodsToDisplay: displayCopy
+    })
   }
   
   render() {
-    
+    var totalCalories=0;
     return (
       <div className="App">
         <AddNewFood addTheFood={this.addFoodHandler} />
@@ -53,7 +56,16 @@ class App extends Component {
             </ul>
           )
         })}
-        
+        {this.state.foodsToDisplay.map(dish => {
+          totalCalories+=dish.quantity * dish.calories;
+          return(
+            <div className="display">
+              <p>{dish.quantity}  {dish.name}  =  {dish.quantity * dish.calories} cal</p>
+              
+            </div>
+          )
+        })}
+        Total:{totalCalories}
       </div>
     );
   }
