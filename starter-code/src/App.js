@@ -21,11 +21,9 @@ class App extends Component {
 
   searchFoodHandler=(theFood)=>{
     console.log('searchFoodHandler', theFood);
-    
-    const copyFoods=[...this.state.foods];
-
+  
     //const copyFoods2=copyFoods.filter(food => food.name===theFood.name)
-    const copyFoods2=copyFoods.filter(food => food.name.toLowerCase().indexOf(theFood.toLowerCase())!==-1)
+    const copyFoods2=foods.filter(food => food.name.toLowerCase().indexOf(theFood.toLowerCase())!==-1)
     this.setState({
       foods:copyFoods2
     })
@@ -43,6 +41,7 @@ class App extends Component {
 
   render() {
     var totalCalories=0;
+
     return (
       <div className="App">
         {/*<header className="App-header">
