@@ -18,22 +18,26 @@ class App extends Component {
   }
 
   addFood = (newFood) => {
+    // Generate an id if not present
     if (!('id' in newFood)) {
       newFood.id = Math.floor(Math.random()*100000)
     }
-
+    
+    // Add `newFood` to `foods` state
     this.setState({
       foods: [...this.state.foods, newFood],
       addingFood: false
     });
   }
 
+  // Update the `query` state on change
   handleQuery = (ev) => {
     this.setState({
       query: ev.target.value
     })
   }
 
+  // funtion to add an item to `chart` state
   addToChart = (newItem) => {
     const chartCopy = [...this.state.chart];
 
@@ -62,6 +66,7 @@ class App extends Component {
     let foods = this.state.foods;
     const query = this.state.query;
 
+    // Filter `foods` with `query`
     if (query) {
       foods = foods.filter(food => food.name.includes(query))
     }
